@@ -30,7 +30,7 @@ namespace CRI.HitBox.Game
         /// </summary>
         [SerializeField]
         [Tooltip("The setup images assigned to the players.")]
-        protected Image[] _playerSetupImage = new Image[ApplicationSettings.PlayerNumber];
+        protected bool[] _playerSetup = new bool[ApplicationSettings.PlayerNumber];
         /// <summary>
         /// The start position assigned to the players.
         /// </summary>
@@ -272,9 +272,9 @@ namespace CRI.HitBox.Game
         {
             if (ApplicationManager.instance.setupPhase)
             {
-                if (_playerSetupImage[playerIndex].enabled)
+                if (_playerSetup[playerIndex])
                 {
-                    _playerSetupImage[playerIndex].enabled = false;
+                    _playerSetup[playerIndex] = false;
                     _playerStartPosition[playerIndex] = position;
                     ApplicationManager.instance.LedShutDown(playerIndex);
                     if (onPlayerSetup != null)
@@ -282,7 +282,7 @@ namespace CRI.HitBox.Game
                 }
                 if (_gameMode == GameMode.P1 && playerIndex == _soloIndex)
                     ApplicationManager.instance.EndSetup();
-                else if (_playerSetupImage.All(x => !x.enabled))
+                else if (_playerSetup.All(x => !x))
                     ApplicationManager.instance.EndSetup();
             }
         }
@@ -306,13 +306,13 @@ namespace CRI.HitBox.Game
             if (gameMode == GameMode.P1)
             {
                 ApplicationManager.instance.LedDisplayGrid(soloIndex);
-                _playerSetupImage[soloIndex].enabled = true;
+                _playerSetup[soloIndex] = true;
             }
             if (gameMode == GameMode.P2)
             {
                 ApplicationManager.instance.LedDisplayGrid();
-                _playerSetupImage[0].enabled = true;
-                _playerSetupImage[1].enabled = true;
+                _playerSetup[0] = true;
+                _playerSetup[1] = true;
             }
         }
 
@@ -332,8 +332,8 @@ namespace CRI.HitBox.Game
             _comboValue = 0;
             _successfulHitCount = 0;
             _hitCount = 0;
-            _playerSetupImage[0].enabled = false;
-            _playerSetupImage[1].enabled = false;
+            _playerSetup[0] = false;
+            _playerSetup[1] = false;
             _gameMode = gameMode;
             _soloIndex = soloIndex;
             if (gameMode == GameMode.P1)
@@ -407,8 +407,8 @@ namespace CRI.HitBox.Game
 
         public void Clean()
         {
-            _playerSetupImage[0].enabled = false;
-            _playerSetupImage[1].enabled = false;
+            _playerSetup[0] = false;
+            _playerSetup[1] = false;
             _target[0] = null;
             _target[1] = null;
             if (_mc != null)

@@ -449,6 +449,7 @@ namespace CRI.HitBox
         public void EndSetup()
         {
             _appState = ApplicationState.PreGame;
+            LedShutDown();
             if (onSetupEnd != null)
                 onSetupEnd();
         }
