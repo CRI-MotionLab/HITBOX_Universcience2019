@@ -45,6 +45,7 @@ To continue, touch the arrow.</text_entry>
     <text_entry key="SCREEN6_TITLE">IT’S YOUR TURN TO BOX!</text_entry>
     <text_entry key="SCREEN7_TITLE">SCORE</text_entry>
     <text_entry key="SCREEN7_FINAL_SCORE">Your score</text_entry>
+    <text_entry key="SCREEN7_FINAL_SCORE_P2">Your team's score</text_entry>
     <text_entry key="SCREEN7_BEST_SCORE">Best score</text_entry>
     <text_entry key="SCREEN7_PRECISION">Precision</text_entry>
     <text_entry key="SCREEN7_SPEED">Reactivity</text_entry>

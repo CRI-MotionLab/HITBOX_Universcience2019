@@ -87,9 +87,15 @@ namespace CRI.HitBox.UI
         /// <summary>
         /// The text of the points.
         /// </summary>
-        [SerializeField]
-        [Tooltip("The text of the points.")]
-        public StringCommon _ptsText;
+        private StringCommon _ptsTextValue;
+        /// <summary>
+        /// The text of the best score label.
+        /// </summary>
+        public StringCommon _finalScoreTextValue;
+        /// <summary>
+        /// The text of the best score label in P2 mode.
+        /// </summary>
+        public StringCommon _finalScoreP2TextValue;
 
         /// <summary>
         /// The path of the audio clip.
@@ -112,7 +118,9 @@ namespace CRI.HitBox.UI
             _speedLabelText.InitTranslatedText(settings.speedText);
             _bestScoreLabelText.InitTranslatedText(settings.bestScoreText);
             _thanksText.InitTranslatedText(settings.thanksText);
-            _ptsText = settings.ptsText;
+            _ptsTextValue = settings.ptsText;
+            _finalScoreTextValue = settings.scoreText;
+            _finalScoreP2TextValue = !string.IsNullOrEmpty(settings.scoreP2Text.key) ? settings.scoreP2Text : settings.scoreText;
             
             foreach (Transform star in _precisionFill)
             {
@@ -142,13 +150,14 @@ namespace CRI.HitBox.UI
             return string.Format("{0} <size={1}>{2}</size>", formatted, (int)(fontSize * 0.4f), ptsText);
         }
 
-        private void SetValues(int playerScore, float precision, float speed, int bestScore, string ptsText)
+        private void SetValues(int playerScore, float precision, float speed, int bestScore, string ptsText, GameMode mode)
         {
             _finalScoreText.text = GetScoreText(
                 playerScore,
                 _finalScoreText.fontSize,
                 ptsText
                 );
+            _finalScoreLabelText.InitTranslatedText(mode == GameMode.P2 ? _finalScoreP2TextValue : _finalScoreTextValue);
             _precisionSlider.value = GetRating(
                 precision,
                 (int)_precisionFill.GetChild(0).GetComponent<RectTransform>().rect.width,
@@ -180,7 +189,8 @@ namespace CRI.HitBox.UI
                 ApplicationManager.instance.gameManager.precision,
                 ApplicationManager.instance.gameManager.speed,
                 ApplicationManager.instance.gameManager.GetBestScore(mode),
-                TextManager.instance.GetText(_ptsText));
+                TextManager.instance.GetText(_ptsTextValue),
+                ApplicationManager.instance.gameMode);
             Invoke("PlaySound", 2.0f);
         }
 

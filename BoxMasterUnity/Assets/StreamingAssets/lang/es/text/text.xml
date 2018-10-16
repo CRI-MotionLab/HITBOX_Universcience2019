@@ -45,6 +45,7 @@ Para seguir, toca la flecha.</text_entry>
     <text_entry key="SCREEN6_TITLE">¡LE TOCA BOXEAR!</text_entry>
     <text_entry key="SCREEN7_TITLE">PUNTUACIÓN</text_entry>
     <text_entry key="SCREEN7_FINAL_SCORE">Tu puntuación</text_entry>
+    <text_entry key="SCREEN7_FINAL_SCORE_P2">Puntuación de su equipo</text_entry>
     <text_entry key="SCREEN7_BEST_SCORE">Mejor puntuación</text_entry>
     <text_entry key="SCREEN7_PRECISION">Precisión</text_entry>
     <text_entry key="SCREEN7_SPEED">Reactividad</text_entry>

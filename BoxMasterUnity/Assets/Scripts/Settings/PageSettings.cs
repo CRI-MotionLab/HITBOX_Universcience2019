@@ -224,6 +224,11 @@ namespace CRI.HitBox.Settings
         [XmlElement("score_text")]
         public StringCommon scoreText;
         /// <summary>
+        /// Text of the score for the P2 mode.
+        /// </summary>
+        [XmlElement("score_p2_text")]
+        public StringCommon scoreP2Text;
+        /// <summary>
         /// Text of the best score.
         /// </summary>
         [XmlElement("best_score_text")]

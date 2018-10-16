@@ -45,6 +45,7 @@ Pour continuer, touchez la flèche.</text_entry>
     <text_entry key="SCREEN6_TITLE">À VOUS DE BOXER !</text_entry>
     <text_entry key="SCREEN7_TITLE">SCORE</text_entry>
     <text_entry key="SCREEN7_FINAL_SCORE">Votre score</text_entry>
+    <text_entry key="SCREEN7_FINAL_SCORE_P2">Votre score d'équipe</text_entry>
     <text_entry key="SCREEN7_BEST_SCORE">Meilleur score</text_entry>
     <text_entry key="SCREEN7_PRECISION">Precision</text_entry>
     <text_entry key="SCREEN7_SPEED">Réactivité</text_entry>

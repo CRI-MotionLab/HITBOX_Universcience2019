@@ -433,7 +433,7 @@ namespace CRI.HitBox.Game
         {
             _successfulHitCount++;
             _hitCount++;
-            _comboValue += (_gameplaySettings.comboIncrement * ((float)score / _gameplaySettings.hitMaxPoints));
+            _comboValue += (_gameplaySettings.comboIncrement * (score == _gameplaySettings.hitMaxPoints ? 2.0f : (float)score / _gameplaySettings.hitMaxPoints));
             _playerScore = playerScore + score * comboMultiplier;
             _minScore = _minScore + _gameplaySettings.hitMinPoints * comboMultiplier;
             _maxScore = _maxScore + _gameplaySettings.hitMaxPoints * comboMultiplier;

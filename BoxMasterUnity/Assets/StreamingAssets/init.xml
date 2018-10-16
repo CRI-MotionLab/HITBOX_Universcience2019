@@ -177,6 +177,8 @@
         <title>SCREEN7_TITLE</title>
         <!--Text of the score.-->
         <score_text>SCREEN7_FINAL_SCORE</score_text>
+        <!-- Text of the score for the P2 mode. -->
+        <score_p2_text>SCREEN7_FINAL_SCORE_P2</score_p2_text>
         <!-- Text of the best score.-->
         <best_score_text>SCREEN7_BEST_SCORE</best_score_text>
         <!-- Text of the precision.-->
