@@ -39,6 +39,28 @@ namespace CRI.HitBox.Settings
             }
         }
         /// <summary>
+        /// If true, the best score will be saved even if the application shuts down.
+        /// </summary>
+        [XmlIgnore]
+        public bool saveBestScore { get; private set; }
+        /// <summary>
+        /// Serialized version of the save best score field.
+        /// </summary>
+        [XmlElement("save_best_score")]
+        public string saveBestScoreSerialized
+        {
+            get { return this.saveBestScore ? "True" : "False"; }
+            set
+            {
+                if (value.ToUpper().Equals("TRUE"))
+                    this.saveBestScore = true;
+                else if (value.ToUpper().Equals("FALSE"))
+                    this.saveBestScore = false;
+                else
+                    this.saveBestScore = XmlConvert.ToBoolean(value);
+            }
+        }
+        /// <summary>
         /// Duration of the game.
         /// </summary>
         [XmlElement("game_duration")]

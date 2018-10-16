@@ -291,8 +291,8 @@ namespace CRI.HitBox.Game
         {
             _gameSettings = ApplicationManager.instance.appSettings;
             _gameplaySettings = ApplicationManager.instance.gameSettings;
-            _p1BestScore = PlayerPrefs.HasKey(p1BestScoreKey) ? PlayerPrefs.GetInt(p1BestScoreKey) : 0;
-            _p2BestScore = PlayerPrefs.HasKey(p2BestScoreKey) ? PlayerPrefs.GetInt(p2BestScoreKey) : 0;
+            _p1BestScore = _gameplaySettings.saveBestScore && PlayerPrefs.HasKey(p1BestScoreKey) ? PlayerPrefs.GetInt(p1BestScoreKey) : 0;
+            _p2BestScore = _gameplaySettings.saveBestScore && PlayerPrefs.HasKey(p2BestScoreKey) ? PlayerPrefs.GetInt(p2BestScoreKey) : 0;
             _comboMultiplier = _gameplaySettings.comboMin;
             _playerCamera = new Camera[] {
                 ApplicationManager.instance.GetCamera(0).GetComponent<Camera>(),
@@ -429,23 +429,25 @@ namespace CRI.HitBox.Game
         /// <summary>
         /// Increases the score of the players.
         /// </summary>
-        public void ScoreUp(int score = 1)
+        public void ScoreUp(int score)
         {
             _successfulHitCount++;
             _hitCount++;
-            _comboValue += _gameplaySettings.comboIncrement;
+            _comboValue += (_gameplaySettings.comboIncrement * ((float)score / _gameplaySettings.hitMaxPoints));
             _playerScore = playerScore + score * comboMultiplier;
             _minScore = _minScore + _gameplaySettings.hitMinPoints * comboMultiplier;
             _maxScore = _maxScore + _gameplaySettings.hitMaxPoints * comboMultiplier;
             if (playerScore > p1BestScore && _gameMode == GameMode.P1)
             {
                 _p1BestScore = playerScore;
-                PlayerPrefs.SetInt(p1BestScoreKey, _p1BestScore);
+                if (_gameplaySettings.saveBestScore)
+                    PlayerPrefs.SetInt(p1BestScoreKey, _p1BestScore);
             }
             if (playerScore > p2BestScore && _gameMode == GameMode.P2)
             {
                 _p2BestScore = playerScore;
-                PlayerPrefs.SetInt(p2BestScoreKey, _p2BestScore);
+                if (_gameplaySettings.saveBestScore)
+                    PlayerPrefs.SetInt(p2BestScoreKey, _p2BestScore);
             }
         }
 

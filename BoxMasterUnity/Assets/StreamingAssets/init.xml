@@ -262,12 +262,14 @@
     If false, the projection will be using perspective.
     -->
     <orthographic_projection>False</orthographic_projection>
+    <!-- If true, the game will save the best score even if the application is shut down. -->
+    <save_best_score>False</save_best_score>
     <!--Duration of the game-->
     <game_duration>45</game_duration>
     <!--Starting value of the combo multiplier.-->
     <combo_min>1</combo_min>
     <!--Max value of the combo multiplier.-->
-    <combo_max>10</combo_max>
+    <combo_max>5</combo_max>
     <!--Duration of the combo bar.
     If no player hits successfully during this duration, the combo multiplier will decrease by one.-->
     <combo_duration>10</combo_duration>
@@ -279,15 +281,15 @@
     The value goes from 0.0 (nothing) to 1.0 (the full bar). -->
     <combo_increment>0.2</combo_increment>
     <!-- Rotation speed of the target when hit by a player. -->
-    <target_rotation_speed>0.2</target_rotation_speed>
+    <target_rotation_speed>0.15</target_rotation_speed>
     <!-- The Z rotation speed of the movement controller. -->
     <target_z_rotation_speed>0</target_z_rotation_speed>
     <!-- Max angular velocity of the targets.-->
-    <target_max_angular_velocity>5</target_max_angular_velocity>
+    <target_max_angular_velocity>4.5</target_max_angular_velocity>
     <!-- The horizontal movement speed of the movement controller when the difficulty is high enough.-->
     <target_horizontal_movement_speed>0</target_horizontal_movement_speed>
     <!-- Delay before the next target is activated in P1 mode (in seconds). -->
-    <target_P1_activation_delay>1</target_P1_activation_delay>
+    <target_P1_activation_delay>2</target_P1_activation_delay>
     <!-- Time until a target is ready to be activated again after its last deactivation (in seconds).-->
     <target_cooldown>1</target_cooldown>
     <!-- Threshold for increasing the number of targets and the difficulty if applicable.-->
@@ -299,20 +301,20 @@
       <threshold>30</threshold>
     </target_count_threshold>
     <!--The min amount of points a player can get while hitting a sphere. -->
-    <hit_min_points>1</hit_min_points>
+    <hit_min_points>10</hit_min_points>
     <!-- The max amount of points a player can get while hitting a sphere.-->
-    <hit_max_points>10</hit_max_points>
+    <hit_max_points>100</hit_max_points>
     <!--The max distance from the center of the target to get the maximum amount of points.
     The distance goes from 0.0 (the center of the target) to 1.0 (the border of the target).-->
-    <hit_tolerance>0.2</hit_tolerance>
+    <hit_tolerance>0.1</hit_tolerance>
     <!--Under this precision value, the player will get 0 star.-->
     <min_precision_rating>0</min_precision_rating>
     <!--Precision required to get the max number of stars at the end of the game.-->
     <max_precision_rating>0.9</max_precision_rating>
     <!-- Speed required to get the min number of stars. The speed is the average time between hits in seconds. -->
-    <min_speed_rating>10</min_speed_rating>
+    <min_speed_rating>3</min_speed_rating>
     <!-- Speed required to get the max number of stars. The speed is the average time between hits in seconds. -->
-    <max_speed_rating>1</max_speed_rating>
+    <max_speed_rating>0.4</max_speed_rating>
   </game_settings>
   
   <!--
