@@ -31,7 +31,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1479802611028424
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1693698216210298
 GameObject:
   m_ObjectHideFlags: 1
@@ -147,7 +147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1882814607333378
 GameObject:
   m_ObjectHideFlags: 1
@@ -168,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1932066668684456
 GameObject:
   m_ObjectHideFlags: 1
@@ -189,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1942757114266246
 GameObject:
   m_ObjectHideFlags: 1
@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1976901572493194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,7 +1519,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976901572493194}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 90363c4396b31f8489d72cb6c6e3f247, type: 2}
   m_CullingMode: 0
@@ -1750,7 +1750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c640582727d72cd43bf89e27161d7e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activated: 1
+  activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
 --- !u!114 &114729979168791560
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976901572493194}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fc253f43b151924aa34915716de8e56, type: 3}
   m_Name: 
@@ -1788,7 +1788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c640582727d72cd43bf89e27161d7e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activated: 1
+  activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
 --- !u!114 &114851232526393068

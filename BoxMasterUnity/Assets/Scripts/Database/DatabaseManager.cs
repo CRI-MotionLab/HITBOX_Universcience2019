@@ -66,6 +66,7 @@ namespace CRI.HitBox.Database
 
         private async void Start()
         {
+            Debug.Log("Database start");
             DataService.databaseName = ApplicationManager.instance.appSettings.databaseServerURL;
             var resultInit = await DataService.LoadData<InitData>();
             var resultTCT = await DataService.LoadData<TargetCountThresholdData>();
@@ -100,7 +101,6 @@ namespace CRI.HitBox.Database
                         else
                         {
                             Debug.LogError("Error while inserting init file.");
-                            this.enabled = false;
                         }
                     });
                 }
@@ -108,7 +108,10 @@ namespace CRI.HitBox.Database
             else
             {
                 Debug.LogError("Couldn't find init file.");
-                this.enabled = false;
+            }
+            if (currentInit == null)
+            {
+                Invoke("Start", ApplicationManager.instance.appSettings.databaseInitRefreshTime);
             }
         }
 

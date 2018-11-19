@@ -346,7 +346,7 @@ namespace CRI.HitBox.Serial
             for (int i = 0; i < _rows; i++)
             {
                 for (int j = 0; j < _cols; j++)
-                    if (_pointGrid[i, j] != null)
+                    if (_pointGrid != null && _pointGrid[i, j])
                     {
                         Destroy(_pointGrid[i, j].gameObject);
                         _pointGrid[i, j] = null;

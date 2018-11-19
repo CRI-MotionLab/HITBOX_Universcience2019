@@ -22,12 +22,17 @@
     <code>en</code>
     <code>es</code>
   </lang_app_enable>
+  <!-- if enabled, only the one-player mode will be available.
+  The index of the player will always be the one defined in index (0 for left, 1 for right). -->
+  <p1_mode enabled="False" />
   <!-- Color the left boxing bag in the menu. -->
   <p1_color>#009942</p1_color>
   <!-- Color of the right boxing bag in the menu. -->
   <p2_color>#FFE770</p2_color>
   <!-- URL of the server where the database is currently hosted. -->
   <server_url>crihitbox.000webhostapp.com</server_url>
+  <!-- Refresh time of the init file (in seconds). If the init file is not found at the start of the application, it will try again every N seconds. -->
+  <database_init_refresh_time>120</database_init_refresh_time>
   <!-- Is the cursor enabled ? In a touchscreen setting, the value should be False. -->
   <cursor_visible>False</cursor_visible>
   
@@ -281,15 +286,15 @@
     <combo_duration_multiplier>0.8</combo_duration_multiplier>
     <!-- How much of the combo bar is incremented whenever a player hits a target.
     The value goes from 0.0 (nothing) to 1.0 (the full bar). -->
-    <combo_increment>0.2</combo_increment>
+    <combo_increment>0.3</combo_increment>
     <!-- Rotation speed of the target when hit by a player. -->
-    <target_rotation_speed>0.15</target_rotation_speed>
+    <target_rotation_speed>0.10</target_rotation_speed>
     <!-- The Z rotation speed of the movement controller. -->
     <target_z_rotation_speed>0</target_z_rotation_speed>
     <!-- Max angular velocity of the targets.-->
-    <target_max_angular_velocity>4.5</target_max_angular_velocity>
+    <target_max_angular_velocity>4.0</target_max_angular_velocity>
     <!-- The horizontal movement speed of the movement controller when the difficulty is high enough.-->
-    <target_horizontal_movement_speed>0</target_horizontal_movement_speed>
+    <target_horizontal_movement_speed>10</target_horizontal_movement_speed>
     <!-- Delay before the next target is activated in P1 mode (in seconds). -->
     <target_P1_activation_delay>2</target_P1_activation_delay>
     <!-- Time until a target is ready to be activated again after its last deactivation (in seconds).-->
@@ -316,7 +321,7 @@
     <!-- Speed required to get the min number of stars. The speed is the average time between hits in seconds. -->
     <min_speed_rating>3</min_speed_rating>
     <!-- Speed required to get the max number of stars. The speed is the average time between hits in seconds. -->
-    <max_speed_rating>0.4</max_speed_rating>
+    <max_speed_rating>0.6</max_speed_rating>
   </game_settings>
   
   <!--
@@ -328,8 +333,7 @@
   <serial_settings>
     <!-- Settings for the touch controllers.
     The first port defined is the COM port of the left bag.
-    The second port defined is the COM port of the right bag.
-    -->
+    The second port defined is the COM port of the right bag. -->
     <touch_controller_settings>
       <port>
         <!--Name of the serial port-->

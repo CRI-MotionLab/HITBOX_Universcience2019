@@ -378,8 +378,8 @@ namespace CRI.HitBox.Game
             var go = GameObject.Instantiate(targetMovementPrefab);
             _target = go.GetComponentsInChildren<TargetController>();
             _mc = go;
-            InitTarget(_target[0], _mc, AudioManager.instance, _playerCamera[0], 0, rand);
-            InitTarget(_target[1], _mc, AudioManager.instance, _playerCamera[1], 1, 1 - rand);
+            InitTarget(_target[0], _mc, AudioManager.instance, _playerCamera[0], 0, 1 + rand);
+            InitTarget(_target[1], _mc, AudioManager.instance, _playerCamera[1], 1, 1 + (1 - rand));
         }
 
         private void InitTarget(TargetController tc, MovementController mc, AudioManager audioManager, Camera camera, int playerIndex, int activation)

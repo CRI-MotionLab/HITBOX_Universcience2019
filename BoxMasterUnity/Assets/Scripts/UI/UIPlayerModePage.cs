@@ -21,6 +21,8 @@ namespace CRI.HitBox.UI
         private RawImage _p1Picto = null;
         [SerializeField]
         private RawImage _p2Picto = null;
+        [SerializeField]
+        private CanvasGroup _rightGroup = null;
         private Texture[] _framesP1;
         private Texture[] _framesP2;
         private int _frameIndexP1;
@@ -43,7 +45,6 @@ namespace CRI.HitBox.UI
                 ApplicationManager.instance.SetGameMode(GameMode.P1);
                 GetComponentInParent<UIScreenMenu>().GoToNext();
             });
-
             _p2Button.onClick.AddListener(() =>
             {
                 ApplicationManager.instance.SetGameMode(GameMode.P2);
@@ -63,11 +64,15 @@ namespace CRI.HitBox.UI
         public override void Show()
         {
             base.Show();
+            var p1Mode = ApplicationManager.instance.appSettings.p1Mode;
             _p1Button.GetComponent<Animator>().SetTrigger("Normal");
             _p2Button.GetComponent<Animator>().SetTrigger("Normal");
             _frameIndexP1 = 0;
             _frameIndexP2 = 0;
             _timeShow = Time.time;
+            _rightGroup.alpha = p1Mode.enabled ? 0.0f : 1.0f;
+            _rightGroup.interactable = !p1Mode.enabled;
+            _rightGroup.blocksRaycasts = !p1Mode.enabled;
         }
 
         public override void Init(PlayerModeSettings playerModeSettings)

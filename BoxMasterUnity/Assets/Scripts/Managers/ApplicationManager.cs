@@ -196,7 +196,7 @@ namespace CRI.HitBox
         /// <summary>
         /// All the serial controllers. If there's one player, there should be two serials. If there's two players, the number of serials should be four.
         /// </summary>
-        public GameObject[] serialControllers
+        public List<GameObject> serialControllers
         {
             get
             {
@@ -234,7 +234,7 @@ namespace CRI.HitBox
         /// <summary>
         /// The serial controller objects. Each entry corresponds to one player.
         /// </summary>
-        protected GameObject[] _serialControllers = new GameObject[ApplicationSettings.PlayerNumber];
+        protected List<GameObject> _serialControllers = new List<GameObject>();
 
         protected PlayerData _p1Data;
 
@@ -317,7 +317,7 @@ namespace CRI.HitBox
             player2Camera = GameObject.FindGameObjectWithTag("Player2Camera").GetComponent<MainCamera>();
             player1Camera.GetComponent<Camera>().orthographic = gameSettings.orthographicProjection;
             player2Camera.GetComponent<Camera>().orthographic = gameSettings.orthographicProjection;
-            InitSerialControllers();
+            InitSerialControllers(serialSettings, appSettings.p1Mode);
         }
 
         /// <summary>
@@ -330,7 +330,6 @@ namespace CRI.HitBox
                 s_instance = this;
                 DontDestroyOnLoad(gameObject);
                 appSettings = ApplicationSettings.Load(Path.Combine(Application.streamingAssetsPath, appSettingsPath));
-                //appSettings.Save("test.xml");
                 _appState = ApplicationState.Home;
                 Cursor.visible = appSettings.cursorVisible;
                 _sleep = false;
@@ -345,13 +344,25 @@ namespace CRI.HitBox
         /// <summary>
         /// Init all the serial controller.
         /// </summary>
-        private void InitSerialControllers()
+        private void InitSerialControllers(SerialSettings serialSettings, P1Mode p1Mode)
         {
-            _serialControllers = new GameObject[ApplicationSettings.PlayerNumber];
-
-            for (int p = 0; p < ApplicationSettings.PlayerNumber; p++)
+            _serialControllers = new List<GameObject>();
+            if (p1Mode.enabled)
+                InitSerialController(serialSettings, p1Mode.p1Index);
+            else
             {
-                var go = GameObject.Instantiate(_serialControllerPrefab, this.transform);
+                for (int p = 0; p < serialSettings.ledControllerSettings.Length && p < serialSettings.touchControllerSettings.Length; p++)
+                {
+                    InitSerialController(serialSettings, p);
+                }
+            }
+        }
+
+        private void InitSerialController(SerialSettings serialSettings, int p)
+        {
+            var go = GameObject.Instantiate(_serialControllerPrefab, this.transform);
+            try
+            {
                 go.name = "Serial Controller" + p;
                 go.GetComponent<SerialLedController>().Init(p,
                     serialSettings.ledControllerGrid.rows,
@@ -373,7 +384,12 @@ namespace CRI.HitBox
                     serialSettings.impactThreshold,
                     serialSettings.delayOffHit
                     );
-                _serialControllers[p] = go;
+                _serialControllers.Add(go);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+                Destroy(go);
             }
         }
 
@@ -390,7 +406,7 @@ namespace CRI.HitBox
             if (Input.GetKeyUp(KeyCode.F2))
             {
                 gameMode = GameMode.P1;
-                soloIndex = UnityEngine.Random.Range(0, 2);
+                soloIndex = appSettings.p1Mode.enabled ? appSettings.p1Mode.p1Index : UnityEngine.Random.Range(0, 2);
                 if (onSetupEnd != null)
                     onSetupEnd();
             }
@@ -526,7 +542,7 @@ namespace CRI.HitBox
 
         public void LedDisplayGrid()
         {
-            for (int i = 0; i < serialControllers.Length; i++)
+            for (int i = 0; i < serialControllers.Count; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().DisplayGrid();
             }
@@ -534,7 +550,7 @@ namespace CRI.HitBox
 
         public void LedDisplayGrid(int playerIndex)
         {
-            if (serialControllers != null && serialControllers[playerIndex] != null)
+            if (serialControllers != null && playerIndex < serialControllers.Count)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().DisplayGrid();
             }
@@ -542,7 +558,7 @@ namespace CRI.HitBox
         
         public void LedShutDown()
         {
-            for (int i = 0; i < serialControllers.Length; i++)
+            for (int i = 0; i < serialControllers.Count; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().ShutDown();
             }
@@ -550,7 +566,7 @@ namespace CRI.HitBox
 
         public void LedShutDown(int playerIndex)
         {
-            if (serialControllers != null && serialControllers[playerIndex] != null)
+            if (serialControllers != null && playerIndex < serialControllers.Count)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().ShutDown();
             }
@@ -558,7 +574,7 @@ namespace CRI.HitBox
 
         public void LedScreenSaver()
         {
-            for (int i = 0; i < serialControllers.Length; i++)
+            for (int i = 0; i < serialControllers.Count; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().ScreenSaver();
             }
@@ -566,7 +582,7 @@ namespace CRI.HitBox
 
         public void LedScreenSaver(int playerIndex)
         {
-            if (serialControllers != null && serialControllers[playerIndex] != null)
+            if (serialControllers != null && playerIndex < serialControllers.Count)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().ScreenSaver();
             }
@@ -574,7 +590,7 @@ namespace CRI.HitBox
 
         public void LedHit()
         {
-            for (int i = 0; i < serialControllers.Length; i++)
+            for (int i = 0; i < serialControllers.Count; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().Hit();
             }
@@ -582,7 +598,7 @@ namespace CRI.HitBox
 
         public void LedHit(int playerIndex)
         {
-            if (serialControllers != null && serialControllers[playerIndex] != null)
+            if (serialControllers != null && playerIndex < serialControllers.Count)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().Hit();
             }
@@ -590,7 +606,7 @@ namespace CRI.HitBox
 
         public void LedEndGame()
         {
-            for (int i = 0; i < serialControllers.Length; i++)
+            for (int i = 0; i < serialControllers.Count; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().EndGame();
             }
@@ -598,7 +614,7 @@ namespace CRI.HitBox
 
         public void LedEndGame(int playerIndex)
         {
-            if (serialControllers != null && serialControllers[playerIndex] != null)
+            if (serialControllers != null && playerIndex < serialControllers.Count)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().EndGame();
             }
@@ -627,7 +643,7 @@ namespace CRI.HitBox
             this.gameMode = gameMode;
             if (gameMode == GameMode.P1)
             {
-                soloIndex = UnityEngine.Random.Range(0, 2);
+                soloIndex = appSettings.p1Mode.enabled ? appSettings.p1Mode.p1Index : UnityEngine.Random.Range(0, 2);
             }
             if (onGameModeSet != null)
                 onGameModeSet(this.gameMode, soloIndex);

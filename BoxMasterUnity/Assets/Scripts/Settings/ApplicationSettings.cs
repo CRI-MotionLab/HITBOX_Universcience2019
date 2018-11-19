@@ -29,6 +29,38 @@ namespace CRI.HitBox.Settings
         Separator,
     }
 
+    [System.Serializable]
+    public struct P1Mode
+    {
+        [XmlAttribute("enabled")]
+        public string enabledSerialized
+        {
+            get
+            {
+                return this.enabled ? "True" : "False";
+            }
+            set
+            {
+                if (value.ToUpper().Equals("TRUE"))
+                    this.enabled = true;
+                else if (value.ToUpper().Equals("FALSE"))
+                    this.enabled = false;
+                else
+                    this.enabled = XmlConvert.ToBoolean(value);
+            }
+        }
+        /// <summary>
+        /// If true, only the one-player mode will be enabled.
+        /// </summary>
+        [XmlIgnore]
+        public bool enabled { get; private set; }
+        /// <summary>
+        /// The index of the player that will be automatically chosen in P1Mode.
+        /// </summary>
+        [XmlAttribute("index")]
+        public int p1Index;
+    }
+
     /// <summary>
     /// The settings of the game, which are the different timeout values, the settings for the serial components, the settings for the gameplay and the settings for the differents pages of the interface.
     /// </summary>
@@ -90,12 +122,17 @@ namespace CRI.HitBox.Settings
                     this.cursorVisible = XmlConvert.ToBoolean(value);
             }
         }
-
         /// <summary>
         /// Is the cursor enabled ?
         /// </summary>
         [XmlIgnore]
         public bool cursorVisible { get; private set; }
+
+        /// <summary>
+        /// Is the p1 mode activated ?
+        /// </summary>
+        [XmlElement("p1_mode")]
+        public P1Mode p1Mode;
 
         /// <summary>
         /// Color of the P1 as a hex.
@@ -113,6 +150,11 @@ namespace CRI.HitBox.Settings
         /// </summary>
         [XmlElement("server_url")]
         public string databaseServerURL;
+        /// <summary>
+        /// Refresh time of the init file (in seconds). If the init file is not found at the start of the application, it will try again every N seconds.
+        /// </summary>
+        [XmlElement("database_init_refresh_time")]
+        public float databaseInitRefreshTime;
         /// <summary>
         /// The settings for all the menu elements.
         /// </summary>

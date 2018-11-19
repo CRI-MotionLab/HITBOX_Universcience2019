@@ -77,13 +77,16 @@ namespace CRI.HitBox.Game
 
         internal void Hit()
         {
-            activated = false;
-            lastHit = Time.time;
-            //GetComponent<AudioSource>().Play();
-            if (_hitFeedbackPrefab != null)
+            if (activated)
             {
-                var go = GameObject.Instantiate(_hitFeedbackPrefab, this.transform);
-                go.gameObject.layer = this.gameObject.layer;
+                activated = false;
+                lastHit = Time.time;
+                //GetComponent<AudioSource>().Play();
+                if (_hitFeedbackPrefab != null)
+                {
+                    var go = GameObject.Instantiate(_hitFeedbackPrefab, this.transform);
+                    go.gameObject.layer = this.gameObject.layer;
+                }
             }
         }
 

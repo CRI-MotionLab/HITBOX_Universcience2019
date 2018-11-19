@@ -101,7 +101,7 @@ namespace CRI.HitBox.Game
             Vector2 center = hit.collider.bounds.center;
             Vector2 hitPoint = hit.point;
             float distance = Vector2.Distance(hitPoint, center);
-            float maxDistance = hit.collider.bounds.extents.x;
+            float maxDistance = hit.collider.GetComponent<MeshRenderer>().bounds.extents.x;
             float minDistance = maxDistance * _tolerance;
             int score = (int)Mathf.Clamp(_maxPoints * (maxDistance - distance) / (maxDistance - minDistance), _minPoints, _maxPoints);
             _gameplayManager.ScoreUp(score);

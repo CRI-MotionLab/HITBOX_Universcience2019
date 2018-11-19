@@ -97,14 +97,7 @@ namespace CRI.HitBox.Serial
                 }
             }
             // Serial port initialization
-            try
-            {
-                OpenSerialPort(serialPortName, baudRate, readTimeout, handshake);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError(e.Message);
-            }
+            OpenSerialPort(serialPortName, baudRate, readTimeout, handshake);
         }
 
         private void Update()
