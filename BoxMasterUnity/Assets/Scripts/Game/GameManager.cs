@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using CRI.HitBox.Serial;
 using CRI.HitBox.Settings;
+using System.IO;
 
 namespace CRI.HitBox.Game
 {
@@ -491,7 +492,7 @@ namespace CRI.HitBox.Game
                 playerIndex = 0;
             if (Input.GetKeyUp(KeyCode.Z))
                 playerIndex = 1;
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && ApplicationManager.instance.gamePhase)
             {
                 Debug.Log(string.Format("OnImpact {0}", playerIndex));
                 OnImpact(ApplicationManager.instance.GetCamera(playerIndex).GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition), playerIndex);

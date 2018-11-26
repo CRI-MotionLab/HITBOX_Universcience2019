@@ -117,7 +117,7 @@ namespace CRI.HitBox.Database
 
         private bool CheckTargetCountThresholds(List<TargetCountThresholdData> dataList, int[] settingsList)
         {
-            if (dataList.Count != settingsList.Length)
+            if (currentInit == null || dataList.Count != settingsList.Length)
                 return false;
             for (int i = 0; i < dataList.Count; i++)
             {
@@ -129,7 +129,7 @@ namespace CRI.HitBox.Database
 
         private async void OnSurveyEnd(List<string> answersP1, List<string> answersP2)
         {
-            if (currentPlayers.Count == 0)
+            if (currentInit == null || currentPlayers.Count == 0)
                 return;
             var player1 = currentPlayers.FirstOrDefault(x => x.playerIndex == 0);
             var player2 = currentPlayers.FirstOrDefault(x => x.playerIndex == 1);
@@ -151,7 +151,7 @@ namespace CRI.HitBox.Database
 
         private async void OnPlayerSetup(Vector2 position, int playerIndex)
         {
-            if (currentPlayers.Count == 0)
+            if (currentInit == null || currentPlayers.Count == 0)
                 return;
             var player = currentPlayers.FirstOrDefault(x => x.playerIndex == playerIndex);
             if (player != null)
@@ -163,7 +163,7 @@ namespace CRI.HitBox.Database
 
         private async void OnGameModeSet(GameMode gameMode, int soloIndex)
         {
-            if (currentSession != null)
+            if (currentInit != null && currentSession != null)
             {
                 if (gameMode == GameMode.P1)
                 {
@@ -187,7 +187,7 @@ namespace CRI.HitBox.Database
 
         private async void OnGameStart(GameMode gameMode, int soloIndex)
         {
-            if (currentSession != null)
+            if (currentInit != null && currentSession != null)
             {
                 currentSession.timeSpentOnMenu = (int)DateTime.Now.Subtract(currentSession.time).TotalSeconds;
                 await DataService.UpdateData(currentSession);
@@ -196,7 +196,7 @@ namespace CRI.HitBox.Database
 
         private async void OnTimeOutScreen()
         {
-            if (currentSession != null)
+            if (currentInit != null && currentSession != null)
             {
                 currentSession.timeoutScreenCount++;
                 await DataService.UpdateData(currentSession);
@@ -205,6 +205,8 @@ namespace CRI.HitBox.Database
 
         private async void OnStartPages(bool switchLanguages)
         {
+            if (currentInit == null)
+                return;
             if (switchLanguages)
                 OnReturnToHome(HomeOrigin.Quit);
             currentSession = new SessionData(0, currentInit, DateTime.Now, TextManager.instance.currentLang.code);
@@ -215,7 +217,7 @@ namespace CRI.HitBox.Database
         {
             var currentSession = this.currentSession;
             ResetSession();
-            if (currentSession != null)
+            if (currentInit != null && currentSession != null)
             {
                 currentSession.timeSpentTotal = (int)DateTime.Now.Subtract(currentSession.time).TotalSeconds;
                 currentSession.timeout = homeOrigin == HomeOrigin.Timeout;
@@ -247,7 +249,7 @@ namespace CRI.HitBox.Database
 
         private async void OnGameEnd()
         {
-            if (currentSession != null)
+            if (currentInit != null && currentSession != null)
             {
                 currentSession.score = ApplicationManager.instance.GetComponent<GameManager>().playerScore;
                 currentSession.speedRating = ApplicationManager.instance.GetComponent<GameManager>().speed;
@@ -259,7 +261,7 @@ namespace CRI.HitBox.Database
 
         private async void OnHit(int playerIndex, Vector2 position, bool successful, Vector3? targetCenter, Vector3? speedVector)
         {
-            if (currentSession != null && currentPlayers.Count > 0)
+            if (currentInit != null && currentSession != null && currentPlayers.Count > 0)
             {
                 var player = GetPlayer(playerIndex);
                 if (player != null)
@@ -271,7 +273,7 @@ namespace CRI.HitBox.Database
 
         public PlayerData GetPlayer(int playerIndex)
         {
-            if (currentPlayers.Count == 0)
+            if (currentInit == null || currentPlayers.Count == 0)
                 return null;
             return this.currentPlayers.FirstOrDefault(x => x.playerIndex == playerIndex);
         }

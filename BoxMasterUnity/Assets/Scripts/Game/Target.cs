@@ -67,6 +67,11 @@ namespace CRI.HitBox.Game
         private bool _isOrthographic = false;
 
         private Transform _cameraTransform = null;
+#if UNITY_EDITOR
+        private float _time;
+        public float spawnCooldown = 0.2f;
+        public GameObject trail;
+#endif
 
         private void Start()
         {

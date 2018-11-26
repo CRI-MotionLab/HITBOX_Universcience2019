@@ -1670,6 +1670,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114430637039468748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1684,6 +1686,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114459740981487350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1698,6 +1702,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114506420868974452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1712,6 +1718,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114545179856464880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1739,6 +1747,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114725220251376296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1753,6 +1763,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114729979168791560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1791,6 +1803,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114851232526393068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1805,6 +1819,8 @@ MonoBehaviour:
   activated: 0
   _hitFeedbackPrefab: {fileID: 114349150737455544, guid: df700d5236e85d14c8395651482b51b3,
     type: 2}
+  spawnCooldown: 0.2
+  trail: {fileID: 1646889307151590, guid: 60aedeaa83e6fdf45b815fee75a4137d, type: 2}
 --- !u!114 &114879113528434442
 MonoBehaviour:
   m_ObjectHideFlags: 1

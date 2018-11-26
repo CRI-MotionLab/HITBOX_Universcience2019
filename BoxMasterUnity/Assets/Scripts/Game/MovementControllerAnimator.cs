@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CRI.HitBox.Game
 {
@@ -23,6 +22,8 @@ namespace CRI.HitBox.Game
 
         private void Start()
         {
+            _speed = ApplicationManager.instance.gameSettings.targetZRotationSpeed * ((Random.Range(0, 2) * 2.0f) - 1);
+            /*
             var mainCamera = ApplicationManager.instance.GetCamera(0);
             _extents = mainCamera.bounds.extents;
             _speed = ApplicationManager.instance.gameSettings.targetHorizontalMovementSpeed;
@@ -30,10 +31,13 @@ namespace CRI.HitBox.Game
             _leftMostPosition = new Vector3(-mainCamera.bounds.extents.x + transform.lossyScale.x * 2,
                 transform.position.y,
                 transform.position.z);
+                */
         }
 
         private void Update()
         {
+            this.transform.Rotate(0, 0, _speed * Time.deltaTime);
+            /*
             int sphereNumber = SphereNumber(ApplicationManager.instance.gameManager.successfulHitCount,
                 ApplicationManager.instance.gameSettings.targetCountThreshold,
                 ApplicationManager.instance.gameMode);
@@ -52,6 +56,7 @@ namespace CRI.HitBox.Game
                     transform.position.z
                     );
             }
+            */
         }
 
         private int SphereNumber(int sucessfulHitCount, int[] targetCountThreshold, GameMode mode)
