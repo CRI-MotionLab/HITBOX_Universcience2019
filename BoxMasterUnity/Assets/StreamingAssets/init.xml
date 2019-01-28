@@ -24,7 +24,7 @@
   </lang_app_enable>
   <!-- if enabled, only the one-player mode will be available.
   The index of the player will always be the one defined in index (0 for left, 1 for right). -->
-  <p1_mode enabled="False" />
+  <p1_mode enabled="False" index="0" />
   <!-- Color the left boxing bag in the menu. -->
   <p1_color>#009942</p1_color>
   <!-- Color of the right boxing bag in the menu. -->

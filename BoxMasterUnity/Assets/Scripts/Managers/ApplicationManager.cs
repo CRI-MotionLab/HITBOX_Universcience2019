@@ -196,7 +196,7 @@ namespace CRI.HitBox
         /// <summary>
         /// All the serial controllers. If there's one player, there should be two serials. If there's two players, the number of serials should be four.
         /// </summary>
-        public List<GameObject> serialControllers
+        public GameObject[] serialControllers
         {
             get
             {
@@ -234,7 +234,7 @@ namespace CRI.HitBox
         /// <summary>
         /// The serial controller objects. Each entry corresponds to one player.
         /// </summary>
-        protected List<GameObject> _serialControllers = new List<GameObject>();
+        protected GameObject[] _serialControllers = new GameObject[ApplicationSettings.PlayerNumber];
 
         protected PlayerData _p1Data;
 
@@ -346,7 +346,7 @@ namespace CRI.HitBox
         /// </summary>
         private void InitSerialControllers(SerialSettings serialSettings, P1Mode p1Mode)
         {
-            _serialControllers = new List<GameObject>();
+            _serialControllers = new GameObject[ApplicationSettings.PlayerNumber]; 
             if (p1Mode.enabled)
                 InitSerialController(serialSettings, p1Mode.p1Index);
             else
@@ -384,7 +384,7 @@ namespace CRI.HitBox
                     serialSettings.impactThreshold,
                     serialSettings.delayOffHit
                     );
-                _serialControllers.Add(go);
+                _serialControllers[p] = go;
             }
             catch (Exception e)
             {
@@ -432,7 +432,10 @@ namespace CRI.HitBox
         public void Home(HomeOrigin homeOrigin)
         {
             _appState = ApplicationState.Home;
-            LedScreenSaver();
+            if (appSettings.p1Mode.enabled)
+                LedScreenSaver(appSettings.p1Mode.p1Index);
+            else
+                LedScreenSaver();
             if (onReturnToHome != null)
                 onReturnToHome(homeOrigin);
             StopAllCoroutines();
@@ -446,7 +449,10 @@ namespace CRI.HitBox
             var previousState = _appState;
             _appState = ApplicationState.Pages;
             TextManager.instance.currentLang = lang;
-            LedShutDown();
+            if (appSettings.p1Mode.enabled)
+                LedShutDown(appSettings.p1Mode.p1Index);
+            else
+                LedShutDown();
             if (onStartPages != null)
                 onStartPages(previousState != ApplicationState.Home);
             StartCoroutine(TimeOut());
@@ -542,7 +548,7 @@ namespace CRI.HitBox
 
         public void LedDisplayGrid()
         {
-            for (int i = 0; i < serialControllers.Count; i++)
+            for (int i = 0; i < serialControllers.Length; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().DisplayGrid();
             }
@@ -550,7 +556,7 @@ namespace CRI.HitBox
 
         public void LedDisplayGrid(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Count)
+            if (serialControllers != null && playerIndex < serialControllers.Length)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().DisplayGrid();
             }
@@ -558,7 +564,7 @@ namespace CRI.HitBox
         
         public void LedShutDown()
         {
-            for (int i = 0; i < serialControllers.Count; i++)
+            for (int i = 0; i < serialControllers.Length; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().ShutDown();
             }
@@ -566,7 +572,7 @@ namespace CRI.HitBox
 
         public void LedShutDown(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Count)
+            if (serialControllers != null && playerIndex < serialControllers.Length)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().ShutDown();
             }
@@ -574,7 +580,7 @@ namespace CRI.HitBox
 
         public void LedScreenSaver()
         {
-            for (int i = 0; i < serialControllers.Count; i++)
+            for (int i = 0; i < serialControllers.Length; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().ScreenSaver();
             }
@@ -582,7 +588,7 @@ namespace CRI.HitBox
 
         public void LedScreenSaver(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Count)
+            if (serialControllers != null && playerIndex < serialControllers.Length)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().ScreenSaver();
             }
@@ -590,7 +596,7 @@ namespace CRI.HitBox
 
         public void LedHit()
         {
-            for (int i = 0; i < serialControllers.Count; i++)
+            for (int i = 0; i < serialControllers.Length; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().Hit();
             }
@@ -598,7 +604,7 @@ namespace CRI.HitBox
 
         public void LedHit(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Count)
+            if (serialControllers != null && playerIndex < serialControllers.Length)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().Hit();
             }
@@ -606,7 +612,7 @@ namespace CRI.HitBox
 
         public void LedEndGame()
         {
-            for (int i = 0; i < serialControllers.Count; i++)
+            for (int i = 0; i < serialControllers.Length; i++)
             {
                 serialControllers[i].GetComponent<SerialLedController>().EndGame();
             }
@@ -614,7 +620,7 @@ namespace CRI.HitBox
 
         public void LedEndGame(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Count)
+            if (serialControllers != null && playerIndex < serialControllers.Length)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().EndGame();
             }

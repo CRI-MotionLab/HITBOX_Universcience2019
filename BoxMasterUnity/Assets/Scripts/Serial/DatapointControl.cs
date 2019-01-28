@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace CRI.HitBox.Serial

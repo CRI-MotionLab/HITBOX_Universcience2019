@@ -74,12 +74,17 @@ namespace CRI.HitBox.Database
             {
                 if (resultInit.dataList.Count > 0)
                 {
-                    var init = resultInit.dataList.FirstOrDefault(x => x.Equals(ApplicationManager.instance.appSettings));
-                    if (init != null)
+                    foreach (InitData init in resultInit.dataList)
                     {
-                        var targetCountThresholds = resultTCT.dataList.Count > 0 ? resultTCT.dataList.Where(x => x.initId == init.id).ToList() : new List<TargetCountThresholdData>();
-                        if (CheckTargetCountThresholds(targetCountThresholds, ApplicationManager.instance.gameSettings.targetCountThreshold))
-                            currentInit = init;
+                        if (init.Equals(ApplicationManager.instance.appSettings))
+                        {
+                            var targetCountThresholds = resultTCT.dataList.Count > 0 ? resultTCT.dataList.Where(x => x.initId == init.id).ToList() : new List<TargetCountThresholdData>();
+                            if (CheckTargetCountThresholds(targetCountThresholds, ApplicationManager.instance.gameSettings.targetCountThreshold))
+                            {
+                                currentInit = init;
+                                break;
+                            }
+                        }
                     }
                 }
                 if (currentInit == null)
