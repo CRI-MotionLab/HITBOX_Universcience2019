@@ -127,7 +127,8 @@ namespace CRI.HitBox.Serial
                     {
                         float x = i * ((float)1.0f / _cols);
                         float y = j * ((float)1.0f / _rows);
-                        dpc = GameObject.Instantiate(_datapointPrefab, playerCamera.ViewportToWorldPoint(new Vector3(x, y, playerCamera.nearClipPlane)), Quaternion.identity, grid.transform);
+                        Vector3 worldPoint = playerCamera.ViewportToWorldPoint(new Vector3(x, y, playerCamera.nearClipPlane));
+                        dpc = GameObject.Instantiate(_datapointPrefab, worldPoint, Quaternion.identity, grid.transform);
                         dpc.name = "Datapoint " + count + " " + playerIndex + " (" + x + ";" + y + ")";
                     }
                     else

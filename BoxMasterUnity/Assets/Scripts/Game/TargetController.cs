@@ -60,7 +60,7 @@ namespace CRI.HitBox.Game
                 Vector3 cameraForward = playerCamera.transform.forward;
                 //Debug.DrawRay(position, cameraForward * 5000.0f, Color.yellow, 10.0f);
                 var hits = Physics.RaycastAll(position, cameraForward, Mathf.Infinity, layerMask);
-                if (hits.Any(x => x.collider.GetComponent<Target>() != null))
+                if (hits != null && hits.Any(x => x.collider.GetComponent<Target>() != null))
                 {
                     bool success = false;
                     var hitTargets = hits

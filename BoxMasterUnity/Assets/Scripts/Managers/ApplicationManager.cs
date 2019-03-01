@@ -390,6 +390,7 @@ namespace CRI.HitBox
             {
                 Debug.LogError(e.Message);
                 Destroy(go);
+                _serialControllers[p] = null;
             }
         }
 
@@ -471,7 +472,10 @@ namespace CRI.HitBox
         public void EndSetup()
         {
             _appState = ApplicationState.PreGame;
-            LedShutDown();
+            if (appSettings.p1Mode.enabled)
+                LedShutDown(appSettings.p1Mode.p1Index);
+            else
+                LedShutDown();
             if (onSetupEnd != null)
                 onSetupEnd();
         }
@@ -556,7 +560,7 @@ namespace CRI.HitBox
 
         public void LedDisplayGrid(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Length)
+            if (serialControllers != null && playerIndex < serialControllers.Length && _serialControllers[playerIndex] != null)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().DisplayGrid();
             }
@@ -572,7 +576,7 @@ namespace CRI.HitBox
 
         public void LedShutDown(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Length)
+            if (serialControllers != null && playerIndex < serialControllers.Length && _serialControllers[playerIndex] != null)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().ShutDown();
             }
@@ -588,7 +592,7 @@ namespace CRI.HitBox
 
         public void LedScreenSaver(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Length)
+            if (serialControllers != null && playerIndex < serialControllers.Length && _serialControllers[playerIndex] != null)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().ScreenSaver();
             }
@@ -604,7 +608,7 @@ namespace CRI.HitBox
 
         public void LedHit(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Length)
+            if (serialControllers != null && playerIndex < serialControllers.Length && _serialControllers[playerIndex] != null)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().Hit();
             }
@@ -620,7 +624,7 @@ namespace CRI.HitBox
 
         public void LedEndGame(int playerIndex)
         {
-            if (serialControllers != null && playerIndex < serialControllers.Length)
+            if (serialControllers != null && playerIndex < serialControllers.Length && _serialControllers[playerIndex] != null)
             {
                 serialControllers[playerIndex].GetComponent<SerialLedController>().EndGame();
             }

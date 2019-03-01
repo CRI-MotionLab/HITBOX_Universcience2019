@@ -21,6 +21,10 @@ namespace CRI.HitBox.Serial
         /// The point grid.
         /// </summary>
         private GameObject[] _pointGrid;
+        /// <summary>
+        /// The led controller.
+        /// </summary>
+        private SerialLedController _ledController;
 
         /// <summary>
         /// X coordinate of current impact.
@@ -74,6 +78,7 @@ namespace CRI.HitBox.Serial
         private void Start()
         {
             _pointGrid = GameObject.FindGameObjectsWithTag("datapoint").Where(x => x.GetComponent<DatapointControl>().playerIndex == playerIndex).ToArray();
+            _ledController = GameObject.FindObjectsOfType<SerialLedController>().First(x => x.playerIndex == playerIndex);
         }
 
         private void Update()
@@ -87,14 +92,9 @@ namespace CRI.HitBox.Serial
             {
                 var datapoint = _pointGrid[i];
                 var dpc = datapoint.GetComponent<DatapointControl>();
-                if (dpc.curDerivVal > this.threshImpact)
+                if (dpc.curDerivVal > this.threshImpact && IsColored(dpc.transform.position))
                 {
-                    /////////////////////////////////////////////////////////////////////////////////////
-                    /// /////////////////////////////////////////////////////////////////////////////////////
-                    dpc.threshImpact = (int)this.threshImpact;   // TO REMOVE
-                                                                                                        /////////////////////////////////////////////////////////////////////////////////////
-                                                                                                        /// /////////////////////////////////////////////////////////////////////////////////////
-
+                    dpc.threshImpact = (int)this.threshImpact;
                     totG_ += dpc.curRemapVal;
                     xG_ += dpc.curRemapVal * datapoint.transform.position.x;
                     yG_ += dpc.curRemapVal * datapoint.transform.position.y;
@@ -125,6 +125,12 @@ namespace CRI.HitBox.Serial
                 _yG += yG_;
                 _totG += totG_;
             }
+        }
+
+        private bool IsColored(Vector3 position)
+        {
+            Vector3 point = _ledController.playerCamera.WorldToScreenPoint(position);
+            return _ledController.cameraTexture.GetPixel((int)point.x, (int)point.y) != Color.black;
         }
     }
 }

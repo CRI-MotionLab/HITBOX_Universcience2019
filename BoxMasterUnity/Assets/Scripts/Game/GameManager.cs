@@ -388,7 +388,7 @@ namespace CRI.HitBox.Game
             camera.transform.position = new Vector3(
                 0.0f,
                 Mathf.Clamp(
-                    -_playerStartPosition[1].y,
+                    -_playerStartPosition[playerIndex].y,
                     -mc.transform.lossyScale.y / 2.0f,
                     mc.transform.lossyScale.y / 2.0f
                     ),

@@ -36,6 +36,17 @@ namespace CRI.HitBox.Serial
         private System.Object _ledsLocker = new System.Object();
 
         private Texture2D _cameraTexture;
+
+        public Texture2D cameraTexture
+        {
+            get
+            {
+                lock (_ledsLocker)
+                {
+                    return _cameraTexture;
+                }
+            }
+        }
         /// <summary>
         /// Index of the player. The led display will depend on the screen of that player.
         /// </summary>
